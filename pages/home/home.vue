@@ -73,7 +73,7 @@
       },
       async getFloorList() {
         const {data : res} = await uni.$http.get("/api/public/v1/home/floordata");
-        console.log(res);
+        // console.log(res);
         if(res.meta.status !== 200) return uni.$showMsg();
         this.floorList = res.message;
 		// console.log(this.floorList);
