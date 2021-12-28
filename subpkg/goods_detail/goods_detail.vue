@@ -1,6 +1,6 @@
 <template>
   <view>
-    www
+    GoodList
   </view>
 </template>
 

@@ -1,5 +1,7 @@
 <template>
   <view>
+    <!-- 自定义搜索区域 -->
+    <my-search></my-search>
     <!-- 轮播图区域 -->
     <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
       <swiper-item v-for="(item,i) in swiperList" :key="i">
