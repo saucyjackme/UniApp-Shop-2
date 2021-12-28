@@ -1,7 +1,7 @@
 <template>
   <view>
     <!-- 自定义搜索区域 -->
-    <my-search></my-search>
+    <my-search :bgColor="'pink'" @myClick="goToSearch"></my-search>
     <view class="scroll-view-container">
       <!-- 左侧滚动视图区域 -->
       <scroll-view
@@ -60,8 +60,8 @@ export default {
     //获取当前设备接口信息
     const systemInfo = uni.getSystemInfoSync();
     console.log(systemInfo);
-    this.wh = systemInfo.screenHeight;
-    // this.wh = systemInfo.windowHeight;
+    // this.wh = systemInfo.screenHeight;
+    this.wh = systemInfo.windowHeight;
     //获取分类列表数据
     this.getCateList();
   },
@@ -82,11 +82,18 @@ export default {
       this.active = i;
       //为二级菜单分类赋值
       this.cateLevel2 = this.cateList[i].children;
-    },cls
+    },
     //在三级菜单中跳转至每个商品页
     goToGoodsItem(item) {
       uni.navigateTo({
         url: '/subpkg/goods_detail/goods_detail?cid=' + item.catid
+      })
+    },
+    //搜索栏跳转
+    goToSearch() {
+      console.log('ssssssss');
+      uni.navigateTo({
+        url:'/subpkg/search/search'
       })
     }
   },
