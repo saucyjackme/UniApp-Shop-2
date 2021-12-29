@@ -51,7 +51,7 @@
 			inverted: {
 				// 是否为空心
 				type: [Boolean, String],
-				default: false
+				default: true
 			},
 			circle: {
 				// 是否为圆角样式

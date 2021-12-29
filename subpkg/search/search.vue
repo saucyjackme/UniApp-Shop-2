@@ -12,14 +12,15 @@
       </view>
     </view>
     <!-- 搜索历史区域 -->
-    <view class="history">
+    <view class="history-box">
+      <!-- 搜索历史标题区 -->
       <view class="history-title">
         <text>搜索历史</text>
-        <uni-icon type="trash" size="17"></uni-icon>
+        <uni-icons type="trash" size="17"></uni-icons>
       </view>
       <!-- 列表区域 -->
-      <view v-for="(item,i) in historyList" :key="i">
-        {{item}}
+      <view class="history-list">
+        <uni-tag :text="item" v-for="(item, i) in historyList" :key="i"></uni-tag>
       </view>
     </view>
   </view>
@@ -98,4 +99,18 @@
    }
  }
  
+  .history-box {
+    padding: 0 5px;
+    .history-title {
+      display: flex;
+      justify-content: space-between; //将两块对边分开
+      height: 40px;
+      align-items: center;
+      font-size: 13;
+      border-bottom: 1px solid #efefef;
+    }
+    .history-list {
+    
+    }
+  }
 </style>
