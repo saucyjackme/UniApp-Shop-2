@@ -99,8 +99,8 @@ s<template>
 		},
 		data() {
 			return {
-				show: false,
-				showSync: false,
+				show: true, //自动获取焦点
+				showSync: true, //自动获取焦点
 				searchVal: ''
 			}
 		},
