@@ -78,7 +78,7 @@ s<template>
 			},
 			bgColor: {
 				type: String,
-				default: "#F8F8F8"
+				default: "#FFFFFF"
 			},
 			maxlength: {
 				type: [Number, String],
@@ -224,7 +224,7 @@ s<template>
 		flex-direction: row;
 		position: relative;
 		padding: 10px;
-		// background-color: #fff;
+		background-color: #C00000;
 	}
 
 	.uni-searchbar__box {
