@@ -5,14 +5,14 @@
       <uni-search-bar placeholder="请输入搜索内容" :radius="100" @confirm="search" @input="input" cancelButton="none"></uni-search-bar>
     </view>
     <!-- 搜索建议列表-->
-    <view class="suggest-list">
+    <view class="suggest-list" v-if="searchResults.length !== 0">
       <view class="suggest-item" v-for="(item,i) in searchResults" :key="i" @click="goToGoodsDetail(item)">
         <view class="goods-name">{{item.goods_name}}</view>
         <uni-icons type="arrowright" size="16"></uni-icons>
       </view>
     </view>
     <!-- 搜索历史区域 -->
-    <view class="history-box">
+    <view class="history-box" v-else>
       <!-- 搜索历史标题区 -->
       <view class="history-title">
         <text>搜索历史</text>
@@ -20,7 +20,7 @@
       </view>
       <!-- 列表区域 -->
       <view class="history-list">
-        <uni-tag :text="item" v-for="(item, i) in historyList" :key="i"></uni-tag>
+        <uni-tag v-if="searchResults.length !== 0" :text="item" v-for="(item, i) in historyList" :key="i"></uni-tag>
       </view>
     </view>
   </view>
@@ -33,7 +33,7 @@
         timer: null,
         keyword: "", //搜索关键词
         searchResults: [], //推荐搜索
-        historyList: ['a', 'app', 'apple'], //自定义搜索历史关键词
+        historyList: [], //自定义搜索历史关键词
       };
     },
     methods:{
@@ -60,6 +60,7 @@
           });
           if(res.meta.status !== 200) return uni.$showMsg();
           this.searchResults = res.message;
+          this.saveSearchHistory();
         }
       },
       //跳转至搜索建议的商品页
@@ -69,6 +70,10 @@
           //跳转至分包的界面再渲染
           url:'/subpkg/goods_detail/goods_detail?goods_id=' + item.goods_id
         })
+      },
+      //保存搜索栏输入的历史
+      saveSearchHistory() {
+        this.historyList.push(this.keyword);
       }
     }, //methods
   }
@@ -110,7 +115,12 @@
       border-bottom: 1px solid #efefef;
     }
     .history-list {
-    
+      display: flex;
+      flex-wrap: wrap;
+      .uni-tag {
+        margin-top: 8px;
+        margin-right: 8px;
+      }
     }
   }
 </style>

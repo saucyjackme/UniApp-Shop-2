@@ -14,19 +14,19 @@
   }],
   "subPackages": [{ //分包
     "root": "subpkg",
-    "pages": [{
+    "pages": [
+    {
       "path": "goods_detail/goods_detail",
       "style": {}
-    }    ,{
-                    "path" : "search/search",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
+    }    ,
+    {
+      "path" : "search/search",
+      "style" : {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+        }        
+      }
+    ]
   }],
   "globalStyle": {
     "navigationBarTextStyle": "white",
