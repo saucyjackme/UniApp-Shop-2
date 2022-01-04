@@ -13,7 +13,7 @@
   export default {
     name:"my-search",
     props:{
-      //搜索栏背景颜色
+      //搜索栏背景颜色 
       bgColor:{
         type: String,
         default:"#C00000"

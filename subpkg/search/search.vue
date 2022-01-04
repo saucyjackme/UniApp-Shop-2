@@ -36,6 +36,10 @@
         historyList: [], //自定义搜索历史关键词
       };
     },
+    onLoad() {
+      //JSON.parse转换成真正的数组
+      this.historyList = JSON.parse(uni.getStorageSync('keyword') || '[]')
+    },
     computed:{
       histories() {
         return [...this.historyList].reverse()
@@ -78,7 +82,7 @@
       },
       //保存搜索栏输入的历史
       saveSearchHistory() {
-        this.historyList.push(this.keyword);
+        // this.historyList.push(this.keyword);
         //1.利用现有有数值的数组创建set对象
         const set = new Set(this.historyList);
         //2.先删除原set对象的值，再追加
@@ -86,6 +90,9 @@
         set.add(this.keyword);
         //将set对象转换为数组
         this.historyList = Array.from(set)
+        // 将搜索记录持久化存储到本地
+        // 调用 uni.setStorageSync(key, value) 将搜索历史记录持久化存储到本地,建议将value转成字符串形式，JSON.stringify()
+        uni.setStorageSync('keyword', JSON.stringify(this.historyList));
       }
     }, //methods
   }
