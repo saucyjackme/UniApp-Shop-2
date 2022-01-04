@@ -79,6 +79,13 @@
       //保存搜索栏输入的历史
       saveSearchHistory() {
         this.historyList.push(this.keyword);
+        //1.利用现有有数值的数组创建set对象
+        const set = new Set(this.historyList);
+        //2.先删除原set对象的值，再追加
+        set.delete(this.keyword);
+        set.add(this.keyword);
+        //将set对象转换为数组
+        this.historyList = Array.from(set)
       }
     }, //methods
   }
