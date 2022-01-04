@@ -16,7 +16,7 @@
       <!-- 搜索历史标题区 -->
       <view class="history-title">
         <text>搜索历史</text>
-        <uni-icons type="trash" size="17"></uni-icons>
+        <uni-icons type="trash" size="17" @click="cleanHistory"></uni-icons>
       </view>
       <!-- 列表区域 -->
       <view class="history-list">
@@ -93,6 +93,11 @@
         // 将搜索记录持久化存储到本地
         // 调用 uni.setStorageSync(key, value) 将搜索历史记录持久化存储到本地,建议将value转成字符串形式，JSON.stringify()
         uni.setStorageSync('keyword', JSON.stringify(this.historyList));
+      },
+      //清除搜索历史记录和本地化存储的记录
+      cleanHistory() {
+        this.historyList = []; // 清除搜索历史记录
+        uni.setStorageSync('keyword', '[]'); //清除本地化存储的记录
       }
     }, //methods
   }
