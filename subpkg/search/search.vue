@@ -20,7 +20,7 @@
       </view>
       <!-- 列表区域 -->
       <view class="history-list">
-        <uni-tag v-if="searchResults.length !== 0" :text="item" v-for="(item, i) in historyList" :key="i"></uni-tag>
+        <uni-tag :text="item" v-for="(item, i) in histories" :key="i">{{item}}</uni-tag>
       </view>
     </view>
   </view>
@@ -35,6 +35,11 @@
         searchResults: [], //推荐搜索
         historyList: [], //自定义搜索历史关键词
       };
+    },
+    computed:{
+      histories() {
+        return [...this.historyList].reverse()
+      }
     },
     methods:{
       //处理搜索栏输入
