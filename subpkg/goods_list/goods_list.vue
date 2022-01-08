@@ -62,5 +62,27 @@
 </script>
 
 <style lang="scss">
-
+ .goods-item {
+   display: flex;
+   padding: 10px 5px;
+   border-bottom: 1px solid #F0F0F0;
+   .goods-item-left {
+     margin-right: 5px;
+     .goods-pic {
+       width: 100px;
+       height: 100px;
+       display: block;
+     }
+   }
+   .goods-item-right {
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     .goods-name {}
+     .goods-info-box {
+       .goods-price{
+       }
+     }
+   }
+ }
 </style>
