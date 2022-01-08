@@ -86,10 +86,12 @@
         } = await uni.$http.get("/api/public/v1/home/floordata");
         // console.log(res);
         if (res.meta.status !== 200) return uni.$showMsg();
-        //对数据进行处理
+        //通过forEach()循环，处理URL地址
+        // console.log(res.message);
         res.message.forEach(floor=>{
           floor.product_list.forEach(prod=>{
-            prod.url = 'subpkg/goods_list/goods_list?' + prod.navigator_url.split('?')[1];
+            //挂载自定义对象url
+            prod.url = '/subpkg/goods_list/goods_list?' + prod.navigator_url.split('?')[1];
           })
         })
         this.floorList = res.message;
