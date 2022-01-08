@@ -70,7 +70,7 @@ export default {
     async getCateList() {
       // 发起请求
       const { data: res } = await uni.$http.get("/api/public/v1/categories");
-      console.log(res);
+      // console.log(res);
       // 判断是否获取失败
       if (res.meta.status !== 200) return uni.$showMsg();
       // 转存数据
