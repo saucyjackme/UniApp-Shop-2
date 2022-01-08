@@ -2,21 +2,6 @@
   <view>
     <view class="goods-list">
       <block v-for="(goods,i) in goodsList" :key="i">
-        <view class="goods-item">
-          <!-- 商品左侧图片区域 -->
-          <view class="goods-item-left">
-            <img :src="goods.goods_small_logo || defaultPic" class="goods-pic">
-          </view>
-          <!-- 商品右侧区域 -->
-          <view class="goods-item-right">
-            <!-- 商品标题 -->
-            <view class="goods-name">{{goods.goods_name}}</view>
-            <view class="goods-info-box">
-              <!-- 商品价格 -->
-              <view class="goods-price">￥{{goods.goods_price}}</view>
-            </view>
-          </view>
-        </view>
       </block>
     </view>
   </view>
