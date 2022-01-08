@@ -78,9 +78,13 @@
      display: flex;
      flex-direction: column;
      justify-content: space-between;
-     .goods-name {}
+     .goods-name {
+       font-size: 13px;
+     }
      .goods-info-box {
        .goods-price{
+         font-size: 16px;
+         color: #c00000;
        }
      }
    }
