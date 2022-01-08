@@ -90,7 +90,7 @@
         // console.log(res.message);
         res.message.forEach(floor=>{
           floor.product_list.forEach(prod=>{
-            //挂载自定义对象url
+            //挂载自定义对象url,这里注意要加/斜杠 不然不跳转 路径要完整
             prod.url = '/subpkg/goods_list/goods_list?' + prod.navigator_url.split('?')[1];
           })
         })
