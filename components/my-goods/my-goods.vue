@@ -10,7 +10,7 @@
      <view class="goods-name">{{goods.goods_name}}</view>
      <view class="goods-info-box">
        <!-- 商品价格 -->
-       <view class="goods-price">￥{{goods.goods_price}}</view>
+       <view class="goods-price">￥{{goods.goods_price | toFixed}}</view>
      </view>
    </view>
  </view>
@@ -19,10 +19,21 @@
 <script>
   export default {
     name:"my-goods",
+    props:{
+      goods:{
+        type: Object,
+        default: {}
+      }
+    },
     data() {
       return {
         defaultPic: 'https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png'
       };
+    },
+    filters:{
+      toFixed(price) {
+        return Number(price).toFixed(2)
+      }
     }
   }
 </script>
