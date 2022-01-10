@@ -34,7 +34,8 @@
       toFixed(price) {
         return Number(price).toFixed(2)
       }
-    }
+    },
+    methods:{},
   }
 </script>
 
