@@ -33,5 +33,11 @@
 </script>
 
 <style lang="scss">
-
+  swiper {
+    height: 750rpx;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
 </style>
