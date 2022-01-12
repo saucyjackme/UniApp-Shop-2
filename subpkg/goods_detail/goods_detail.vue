@@ -42,15 +42,11 @@
         },
         options: [
           {
-          icon: 'headphones',
-          text: '客服'
-          }, 
-          {
           icon: 'shop',
           text: '店铺',
           info: 2,
-          infoBackgroundColor: '#007aff',
-          infoColor: "red"
+          infoBackgroundColor: '#ff0000',
+          infoColor: "#fff"
           }, 
           {
           icon: 'cart',
@@ -89,6 +85,15 @@
           loop: true, //是否循环预览
           urls: this.goods_Info.pics.map(x => x.pics_big) //map返回一个新数组
         })
+      },
+      // 点击事件处理
+      onClick(e) {
+        console.log(e);
+        if(e.content.text === "购物车"){
+          uni.switchTab({ // 注意跳转到tabbar页面 只能用switchTab
+            url:'/pages/cart/cart'
+          })
+        }
       }
     }, //methods
   }
