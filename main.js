@@ -38,7 +38,7 @@ App.mpType = 'app'
 
 const app = new Vue({
     ...App,
-    store
+    store //挂载store对象
 })
 app.$mount()
 // #endif
