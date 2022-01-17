@@ -9,7 +9,7 @@
     <!-- 信息商品区域 -->
     <view class="goods-info-box">
       <!-- 商品价格 -->
-      <view class="goods-price" v-if="goods_info.goods_price">￥{{goods_Info.goods_price}}</view>
+      <view class="goods-price" v-if="goods_info.goods_price">￥{{goods_info.goods_price}}</view>
       <view class="goods-info-body">
         <!-- 商品名称 -->
         <view class="goods-name">{{goods_info.goods_name}}</view>

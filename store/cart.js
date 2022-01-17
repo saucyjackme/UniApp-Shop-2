@@ -17,14 +17,16 @@ export default {
       // 如果不存在，则 findResult 为 undefined；否则，为查找到的商品信息对象
       // console.log(goods);
       const findResult = state.cart.find((x) => x.goods_id === goods.goods_id); //find找不到即返回undefined
-      console.log(findResult);
+      // console.log(findResult); //如果这里是新商品的话，则为undefined
       if (!findResult) { // !findResult = true findeResult = undefined
         state.cart.push(goods);
       } else {
         findResult.goods_count ++; //这里的findResult是旧的，即原state对象，但是需要count+1
       }
-      console.log(state.cart);
-      console.log('...');
+      // console.log(state.cart);
+    },
+    saveToStorage(state) {//将购物车中的数据持久化存储到本地
+      uni.setStorageSync('cart', JSON.stringify(state.cart));//将对象存储化保存到本地
     }
   },
   // 模块的 getters 属性
