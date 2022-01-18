@@ -8,7 +8,7 @@ export default {
     // 购物车的数组，用来存储购物车中每个商品的信息对象
     // 每个商品的信息对象，都包含如下 6 个属性：
     // { goods_id, goods_name, goods_price, goods_count, goods_small_logo, goods_state }
-    cart: [],
+    cart: JSON.parse(uni.getStorageSync('cart') || '[]'), //读取本地存储的购物车数据，对 cart 数组进行初始化：
   }),
   // 模块的 mutations 方法
   mutations: {
@@ -21,12 +21,14 @@ export default {
       if (!findResult) { // !findResult = true findeResult = undefined
         state.cart.push(goods);
       } else {
-        findResult.goods_count ++; //这里的findResult是旧的，即原state对象，但是需要count+1
+        findResult.goods_count++; //这里的findResult是旧的，即原state对象，但是需要count+1
       }
       // console.log(state.cart);
+      // 通过 commit 方法，调用 m_cart 命名空间下的 saveToStorage 方法
+      this.commit('m_cart/saveToStorage')
     },
-    saveToStorage(state) {//将购物车中的数据持久化存储到本地
-      uni.setStorageSync('cart', JSON.stringify(state.cart));//将对象存储化保存到本地
+    saveToStorage(state) { //将购物车中的数据持久化存储到本地
+      uni.setStorageSync('cart', JSON.stringify(state.cart)); //将对象存储化保存到本地，[将数组转成字符串]命名为cart
     }
   },
   // 模块的 getters 属性
