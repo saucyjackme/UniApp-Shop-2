@@ -33,7 +33,6 @@
 <script>
   //导入vuex中的store
   import {
-    mapState,
     mapGetters,
     mapMutations
   } from 'vuex'
@@ -41,29 +40,37 @@
   export default {
     onLoad(options) {
       const goods_id = options.goods_id;
-      //调用获取商品详情函数
-      this.getGoodsInfo(goods_id);
+      this.getGoodsInfo(goods_id);//调用获取商品详情函数
     },
     watch: {
-      total(newVal) { //1.监听属性值的变化
-        const findResult = this.options.find(x => x.text === "购物车"); //2.找到相应属性
-        if (findResult) {
-          findResult.info = newVal; // 3. 动态为购物车按钮的 info 属性赋值
-        }
+      // total(newVal) { //1.监听属性值的变化
+      //   const findResult = this.options.find(x => x.text === "购物车"); //2.找到相应属性
+      //   if (findResult) {/* 
+      //     findResult.info = newVal; // 3. 动态为购物车按钮的 info */ 属性赋值
+      //   }
+      // }
+      total: {
+        handler(newVal) {
+          const findResult = this.options.find(x => x.text === "购物车"); //2.找到相应属性
+          if (findResult) {
+            findResult.info = newVal; // 3. 动态为购物车按钮的 info 属性赋值
+          }
+        },
+        immediate: true
       }
     },
     computed: {
-      ...mapState('m_cart', []), //访问m_cart模块中的成员，以数组形式声明
+      // ...mapState('m_cart', []), //访问m_cart模块中的成员，以数组形式声明
       ...mapGetters('m_cart', ['total']), //把 m_cart 模块中的 total 方法映射到当前页面使用
     },
     data() {
       return {
-        goods_info: {},//商品详情对象
+        goods_info: {}, //商品详情对象
         options: [{
             icon: 'shop',
             text: '店铺',
             info: 0,
-            infoBackgroundColor: '#ff0000',
+            infoBackground: '#ff0000',
             infoColor: "#fff"
           },
           {
@@ -86,7 +93,7 @@
       };
     },
     methods: {
-      ...mapMutations('m_cart', ['addToCart']),//把 m_cart 模块中的 addToCart 方法映射到当前页面使用
+      ...mapMutations('m_cart', ['addToCart']), //把 m_cart 模块中的 addToCart 方法映射到当前页面使用
       async getGoodsInfo(goods_id) {
         const {
           data: res
@@ -122,11 +129,11 @@
             goods_small_logo: this.goods_info.goods_small_logo, // 商品的图片
             goods_state: true // 商品的勾选状态
           };
-          console.log(goods);
+          // console.log(goods);
           // this.test();
           this.addToCart(goods); // 3. 通过 this 调用映射过来的 addToCart 方法，把商品信息对象存储到购物车中
         }
-      }
+      },
     }, //methods
   }
 </script>
@@ -134,6 +141,7 @@
 <style lang="scss">
   swiper {
     height: 750rpx;
+
     img {
       height: 100%;
       width: 100%;
