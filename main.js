@@ -43,7 +43,7 @@ const app = new Vue({
 app.$mount()
 // #endif
 
-// #ifdef VUE3
+// #ifdef VUE3 
 import { createSSRApp } from 'vue'
 import App from './App.vue'
 export function createApp() {
