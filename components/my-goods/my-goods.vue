@@ -2,7 +2,7 @@
  <view class="goods-item">
    <!-- 商品左侧图片区域 -->
    <view class="goods-item-left">
-     <radio checked color="#C00009" v-if="showRadio"></radio>
+     <radio :checked="goods.goods_state" color="#C00009" v-if="showRadio"></radio>
      <img :src="goods.goods_small_logo || defaultPic" class="goods-pic">
    </view>
    <!-- 商品右侧区域 -->
