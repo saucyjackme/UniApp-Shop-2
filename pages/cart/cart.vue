@@ -11,7 +11,7 @@
     <view>
       <!-- 循环渲染购物车中的商品信息 -->
       <block v-for="(goods,i) in cart" :key="i">
-        <my-goods :goods="goods" :show-radio="true"></my-goods>
+        <my-goods :goods="goods" :show-radio="true" @radio-change="radioChangeHandler"></my-goods>
       </block>
     </view>
   </view>
@@ -19,7 +19,7 @@
 
 <script>
   import badgeMix from '@/mixins/tabbar-badge.js'
-  import { mapState } from 'vuex'
+  import { mapState,mapMutations } from 'vuex'
   export default {
     mixins: [badgeMix],
     computed:{
@@ -29,6 +29,13 @@
       return {  
       };
     },
+    methods:{
+      ...mapMutations('m_cart',['updateGoodsState']),
+      radioChangeHandler(e) { // 自定义事件默认不会被触发，所以需要radioClickHandler传递参数
+        console.log(e); //这里获得商品信息，
+        this.updateGoodsState(e);
+      },
+    }
   }
 </script>
 

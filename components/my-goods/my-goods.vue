@@ -2,7 +2,7 @@
  <view class="goods-item">
    <!-- 商品左侧图片区域 -->
    <view class="goods-item-left">
-     <radio :checked="goods.goods_state" color="#C00009" v-if="showRadio"></radio>
+     <radio :checked="goods.goods_state" color="#C00009" v-if="showRadio" @click="radioClickHandler"></radio>
      <img :src="goods.goods_small_logo || defaultPic" class="goods-pic">
    </view>
    <!-- 商品右侧区域 -->
@@ -40,7 +40,15 @@
         return Number(price).toFixed(2)
       }
     },
-    methods:{},
+    methods:{
+      radioClickHandler() {
+        console.log('xxxxxx'); // 通过 this.$emit() 触发外界通过 @ 绑定的 radio-change 事件，
+        this.$emit('radio-change',{ // 同时把商品的 Id 和 勾选状态 作为参数传递给 radio-change 事件处理函数
+          goods_id: this.goods.goods_id,
+          goods_state: this.goods.goods_state
+        })
+      }
+    },
   }
 </script>
 
@@ -52,6 +60,7 @@
    .goods-item-left {
      display: flex;
      align-items: center;
+     justify-content: space-between;
      margin-right: 5px;
      .goods-pic {
        width: 100px;
