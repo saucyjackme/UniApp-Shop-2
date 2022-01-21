@@ -12,6 +12,8 @@
      <view class="goods-info-box">
        <!-- 商品价格 -->
        <view class="goods-price">￥{{goods.goods_price | toFixed}}</view>
+       <!-- 商品数量 -->
+       <uni-number-box :min="1"></uni-number-box>
      </view>
    </view>
  </view>
@@ -42,10 +44,10 @@
     },
     methods:{
       radioClickHandler() {
-        console.log('xxxxxx'); // 通过 this.$emit() 触发外界通过 @ 绑定的 radio-change 事件，
+        console.log(this.goods.goods_state); // 通过 this.$emit() 触发外界通过 @ 绑定的 radio-change 事件，
         this.$emit('radio-change',{ // 同时把商品的 Id 和 勾选状态 作为参数传递给 radio-change 事件处理函数
           goods_id: this.goods.goods_id,
-          goods_state: this.goods.goods_state
+          goods_state: !this.goods.goods_state
         })
       }
     },
@@ -76,6 +78,9 @@
        font-size: 13px;
      }
      .goods-info-box {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
        .goods-price{
          font-size: 16px;
          color: #c00000;

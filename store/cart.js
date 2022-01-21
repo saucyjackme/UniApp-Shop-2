@@ -25,13 +25,17 @@ export default {
       }
       // console.log(state.cart);
       // 通过 commit 方法，调用 m_cart 命名空间下的 saveToStorage 方法
-      this.commit('m_cart/saveToStorage')
+      this.commit('m_cart/saveToStorage');
     },
     saveToStorage(state) { //将购物车中的数据持久化存储到本地
       uni.setStorageSync('cart', JSON.stringify(state.cart)); //将对象存储化保存到本地，[将数组转成字符串]命名为cart
     },
     updateGoodsState(state,goods) { //更改商品勾选状态
-      const findResult = state.cart.find(x=>{ x.goods_id === goods.goods_id});//根据 goods_id 查询购物车中对应商品的信息对象
+      console.log(state);
+      console.log(goods.goods_id);
+      console.log(goods.goods_state);
+      const findResult = state.cart.find(x => x.goods_id === goods.goods_id);//根据 goods_id 查询购物车中对应商品的信息对象
+      console.log(findResult);
       if(findResult) {
         findResult.goods_state = goods.goods_state;//更新对应商品的勾选状态
         this.commit('m_cart/saveToStorage');// 触发函数，持久化存储到本地

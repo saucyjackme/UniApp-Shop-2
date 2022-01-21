@@ -153,7 +153,7 @@
 		}
 	};
 </script>
-<style lang="scss" >
+<style lang="scss" scoped>
 	$box-height: 26px;
 	$bg: #f5f5f5;
 	$br: 2px;
