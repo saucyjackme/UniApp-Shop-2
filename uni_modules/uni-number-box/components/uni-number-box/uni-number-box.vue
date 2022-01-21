@@ -53,7 +53,7 @@
 			},
 			background: {
 				type: String,
-				default: '#f5f5f5'
+				default: '#DCDCDC'
 			},
 			color: {
 				type: String,

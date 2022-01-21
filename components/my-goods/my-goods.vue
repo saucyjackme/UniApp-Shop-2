@@ -13,7 +13,7 @@
        <!-- 商品价格 -->
        <view class="goods-price">￥{{goods.goods_price | toFixed}}</view>
        <!-- 商品数量 -->
-       <uni-number-box :min="1"></uni-number-box>
+       <uni-number-box :min="1" :value="goods.goods_count"></uni-number-box>
      </view>
    </view>
  </view>
@@ -72,6 +72,7 @@
    }
    .goods-item-right {
      display: flex;
+     flex: 1;
      flex-direction: column;
      justify-content: space-between;
      .goods-name {
