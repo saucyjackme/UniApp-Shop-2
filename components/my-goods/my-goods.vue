@@ -54,7 +54,7 @@
           goods_state: !this.goods.goods_state
         })
       },
-      numChangeHandler(val) { //获得本组件中的变化值
+      numChangeHandler(val) { //获得本组件中的num变化值
         console.log(val);
         this.$emit('num-change',{
           goods_id: this.goods.goods_id,

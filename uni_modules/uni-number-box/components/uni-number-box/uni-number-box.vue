@@ -131,9 +131,10 @@
 			},
 			_onBlur(event) {
 				this.$emit('blur', event)
-				let value = event.detail.value;
-				if (!value) {
-					// this.inputValue = 0;
+				// let value = event.detail.value;
+        let value = parseInt(event.detail.value);//防止number框输入非数字
+				if (!value) { //这里value为undefined时
+					this.inputValue = 1;
 					return;
 				}
 				value = +value;
