@@ -7,7 +7,7 @@ export default {
   state: () => ({
     // 购物车的数组，用来存储购物车中每个商品的信息对象
     // 每个商品的信息对象，都包含如下 6 个属性：
-    // { goods_id, goods_name, goods_price, goods_count, goods_small_logo, goods_state }
+    // { goods_id, goods_name, goods_price, goods_count, <script>, goods_state }
     cart: JSON.parse(uni.getStorageSync('cart') || '[]'), //读取本地存储的购物车数据，对 cart 数组进行初始化：
   }),
   // 模块的 mutations 方法
@@ -38,6 +38,13 @@ export default {
       console.log(findResult);
       if(findResult) {
         findResult.goods_state = goods.goods_state;//更新对应商品的勾选状态
+        this.commit('m_cart/saveToStorage');// 触发函数，持久化存储到本地
+      }
+    },
+    updateGoodsCount(state,goods) {//更新商品数量
+      const findResult = state.cart.find(x => x.goods_id === goods.goods_id);//根据goods_count 查询购物车中对应商品的数量
+      if(findResult) {
+        findResult.goods_count = goods.goods_count;//更新对应商品的数量
         this.commit('m_cart/saveToStorage');// 触发函数，持久化存储到本地
       }
     }

@@ -30,13 +30,14 @@
       };
     },
     methods:{
-      ...mapMutations('m_cart',['updateGoodsState']),
+      ...mapMutations('m_cart',['updateGoodsState','updateGoodsCount']),
       radioChangeHandler(e) { // 自定义事件默认不会被触发，所以需要radioClickHandler传递参数
         console.log(e); //这里获得商品信息，
         this.updateGoodsState(e);
       },
       numberChangeHandler(e) {
         console.log(e);
+        this.updateGoodsCount(e);
       }
     }
   }
