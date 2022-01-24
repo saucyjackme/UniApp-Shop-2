@@ -82,7 +82,7 @@
       goToSearch() {
         console.log('ssssssss');
         uni.navigateTo({
-          url: '/subpkg/search/search'
+        url: '/subpkg/search/search'
         })
       }
     },

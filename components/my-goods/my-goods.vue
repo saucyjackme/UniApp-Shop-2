@@ -13,7 +13,7 @@
        <!-- 商品价格 -->
        <view class="goods-price">￥{{goods.goods_price | toFixed}}</view>
        <!-- 商品数量 -->
-       <uni-number-box :min="1" :value="goods.goods_count"></uni-number-box>
+       <uni-number-box :min="1" :value="goods.goods_count" v-if="showNum" @change="numChangeHandler"></uni-number-box>
      </view>
    </view>
  </view>
@@ -30,6 +30,10 @@
       showRadio: {
         type: Boolean,
         default: false //默认不显示勾选按钮
+      },
+      showNum: {
+        type: Boolean,
+        default: false //默认不显示购物车数字按钮
       }
     },
     data() {
@@ -48,6 +52,13 @@
         this.$emit('radio-change',{ // 同时把商品的 Id 和 勾选状态 作为参数传递给 radio-change 事件处理函数
           goods_id: this.goods.goods_id,
           goods_state: !this.goods.goods_state
+        })
+      },
+      numChangeHandler(val) { //获得本组件中的变化值
+        console.log(val);
+        this.$emit('num-change',{
+          goods_id: this.goods.goods_id,
+          goods_count: + val
         })
       }
     },

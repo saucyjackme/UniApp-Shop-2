@@ -11,7 +11,7 @@
     <view>
       <!-- 循环渲染购物车中的商品信息 -->
       <block v-for="(goods,i) in cart" :key="i">
-        <my-goods :goods="goods" :show-radio="true" @radio-change="radioChangeHandler"></my-goods>
+        <my-goods :goods="goods" :show-radio="true" :show-num="true" @radio-change="radioChangeHandler" @num-change="numberChangeHandler"></my-goods>
       </block>
     </view>
   </view>
@@ -35,6 +35,9 @@
         console.log(e); //这里获得商品信息，
         this.updateGoodsState(e);
       },
+      numberChangeHandler(e) {
+        console.log(e);
+      }
     }
   }
 </script>
