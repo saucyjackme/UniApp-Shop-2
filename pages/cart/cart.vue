@@ -1,5 +1,7 @@
 <template>
   <view>
+    <!-- 收货地址组件 -->
+    <my-address></my-address>
     <!-- 购物车标题区域 -->
     <view class="cart-title">
       <!-- 左侧图标 -->
@@ -53,7 +55,7 @@
         console.log(e);
         this.updateGoodsCount(e);
       },
-      swipeActionClickHandler(goods) { // 点击了滑动操作按钮
+      swipeActionClickHandler(goods) { // 点击了滑动操作按钮,传入商品goods
         console.log(goods);
         this.removeGoodsById(goods.goods_id);
       }
