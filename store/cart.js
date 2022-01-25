@@ -47,6 +47,10 @@ export default {
         findResult.goods_count = goods.goods_count;//更新对应商品的数量
         this.commit('m_cart/saveToStorage');// 触发函数，持久化存储到本地
       }
+    },
+    removeGoodsById(state, goods_id) {//删除商品，传入需要删除商品的goods_id
+      state.cart = state.cart.filter(x => x.goods_id !== goods_id); //只留下与所选id不同的商品
+      this.commit('m_cart/saveToStorage');// 触发函数，持久化存储到本地
     }
   },
   // 模块的 getters 属性

@@ -69,6 +69,7 @@
 .goods-item {
    display: flex;
    padding: 10px 5px;
+   box-sizing: border-box;
    border-bottom: 1px solid #F0F0F0;
    .goods-item-left {
      display: flex;
