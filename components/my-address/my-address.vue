@@ -1,11 +1,11 @@
 <template>
   <view>
     <!-- 选择收货地址的区域-->
-    <view class="address-choose-box">
-      <button type="primary" size="mini" class="btnChooseAddress">请选择收货地址+</button>
+    <view class="address-choose-box" v-if="JSON.stringify(address) === '{}'">
+      <button type="primary" size="mini" class="btnChooseAddress" @click="chooseAddress">请选择收货地址+</button>
     </view>
     <!-- 渲染收货信息区 -->
-    <view class="address-info-box">
+    <view class="address-info-box" v-else>
       <view class="row1">
         <view class="row1-left">
           <view class="username">收货人：<text>escook</text></view>
@@ -30,8 +30,18 @@
     name: "my-address",
     data() {
       return {
-
+        address: {
+        }
       };
+    },
+    methods:{
+      async chooseAddress() {// 选择收货地址
+        const [err,succ] = await uni.chooseAddress().catch(err => err);//uni.chooseAddress返回值是一个Promise
+        if(err === null && succ.errMsg === "chooseAddress:ok") {
+          console.log(succ);
+          this.address = succ;
+        }
+      }
     }
   }
 </script>
