@@ -17,7 +17,7 @@
       </view>
       <view class="row2">
         <view class="row2-left">收货地址：</view>
-        <view class="row2-right">河北省邯郸市肥乡区xxx 河北省邯郸市肥乡区xxx 河北省邯郸市肥乡区xxx 河北省邯郸市肥乡区xxx </view>
+        <view class="row2-right">河北省邯郸市肥乡区xxx 河北省邯郸市肥乡区xxx 河北省邯郸市肥乡区xxx </view>
       </view>
     </view>
     <!-- 底部边框线-->
@@ -37,16 +37,47 @@
 </script>
 
 <style lang="scss">
-  .address-border {
+  .address-border {//收货区域底部边框分隔线
     display: block;
     width: 100%;
     height: 5px;
   }
 
-  .address-choose-box {
+  .address-choose-box {//选择收货地址
     height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  
+  .address-info-box {// 渲染收货信息的盒子
+    font-size: 12px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;//纵向布局
+    justify-content: center;//纵向居中对齐
+    padding: 0 5px;//左右5px
+      .row1 {
+        display: flex;
+        justify-content: space-between;
+        .row1-left {
+          .username {}
+        }
+        .row1-right {
+          display: flex;
+          justify-content: space-between;
+          .phone {}
+        }
+      }
+      .row2 {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .row2-left {
+          white-space: nowrap;//文字不换行
+        }
+        .row2-right {}
+      }
+    }
 </style>
