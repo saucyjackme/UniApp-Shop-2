@@ -54,8 +54,8 @@
           // this.address = succ;
           this.updateAddress(succ); //调用 Store 中提供的 updateAddress 方法，将 address 保存到 Store 里面
         }
-        //用户没有授权
-        if (err && err.errMsg === 'chooseAddress:fail auth deny') {
+        //用户没有授权   no response是iPhone真机的错误提示
+        if (err && (err.errMsg === 'chooseAddress:fail auth deny' || err.errMsg === 'chooseAddress:fail authorize no response')) {
           this.reAuth() // 调用 this.reAuth() 方法，向用户重新发起授权申请
         }
       },
