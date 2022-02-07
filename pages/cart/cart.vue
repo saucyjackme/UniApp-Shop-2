@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="cart-contatiner">
     <!-- 收货地址组件 -->
     <my-address></my-address>
     <!-- 购物车标题区域 -->
@@ -9,7 +9,6 @@
       <!-- 描述文本 -->
       <text class="cart-title-text">购物车</text>
     </view>
-    <!-- 购物车商品信息 -->
     <!-- 商品列表区域 -->
     <!-- uni-swipe-action 是最外层包裹性质的容器 -->
     <uni-swipe-action>
@@ -21,6 +20,8 @@
         </uni-swipe-action-item>
       </block>
     </uni-swipe-action>
+    <!-- 商品价格数量结算区域 -->
+    <my-settle></my-settle>
   </view>
 </template>
 
@@ -64,6 +65,9 @@
 </script>
 
 <style lang="scss">
+  .cart-contatiner {
+    padding-bottom: 50px;
+  }
   .cart-title {
     height: 40px;
     align-items: center;
