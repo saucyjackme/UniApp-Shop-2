@@ -67,7 +67,17 @@
           cancelText: '取消'
         });
         if (err2) return //如果弹框异常，则直接退出
-        if (confirmResult.cancel) return uni.$showMsg('您取消了地址授权！')  //如果用户点击了 “取消” 按钮，则提示用户 “您取消了地址授权！”
+        if (confirmResult.cancel) return uni.$showMsg('您取消了地址授权！') //如果用户点击了 “取消” 按钮，则提示用户 “您取消了地址授权！”
+        //如果用户点击了 “确认” 按钮，则调用 uni.openSetting() 方法进入授权页面，让用户重新进行授权
+        if (confirmResult.confirm) return uni.openSetting({
+          //授权结束，需要对授权的结果做进一步判断
+          success: (settingResult) => {
+            //地址授权的值等于 true，提示用户 “授权成功”
+            if (settingResult.authSetting['scope.address']) return uni.$showMsg('授权成功！请选择地址')
+            //地址授权的值等于 false，提示用户 “您取消了地址授权”
+            if (!settingResult.authSetting['scope.address']) return uni.$showMsg('您取消了地址授权！')
+          }
+        })
       }
     }
   }
