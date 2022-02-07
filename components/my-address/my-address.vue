@@ -5,7 +5,7 @@
       <button type="primary" size="mini" class="btnChooseAddress" @click="chooseAddress">请选择收货地址+</button>
     </view>
     <!-- 渲染收货信息区 -->
-    <view class="address-info-box" v-else>
+    <view class="address-info-box" v-else @click="chooseAddress">
       <view class="row1">
         <view class="row1-left">
           <view class="username">收货人：<text>{{address.userName}}</text></view>
@@ -26,16 +26,13 @@
 </template>
 
 <script>
-  import { mapState,mapMutations} from 'vuex'
+  import { mapState,mapMutations, mapGetters} from 'vuex'
   
   export default {
     name: "my-address",
     computed:{
-      ...mapState('m_user',['address']),
-      addStr() {
-        if(!this.address.provinceName) return ''
-        return this.address.provinceName + this.address.cityName + this.address.countyName + this.address.detailInfo
-      }
+      ...mapState('m_user',['address']),//address 2存储地址的变量
+      ...mapGetters('m_user', ['addstr']),//addstr 1拼接地址的函数
     },
     data() {
       return {
