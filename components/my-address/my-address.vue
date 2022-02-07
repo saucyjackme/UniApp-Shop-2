@@ -26,9 +26,12 @@
 </template>
 
 <script>
+  import { mapState,mapMutations} from 'vuex'
+  
   export default {
     name: "my-address",
     computed:{
+      ...mapState('m_user',['address']),
       addStr() {
         if(!this.address.provinceName) return ''
         return this.address.provinceName + this.address.cityName + this.address.countyName + this.address.detailInfo
@@ -36,16 +39,18 @@
     },
     data() {
       return {
-        address: {
-        }
+        // address: {
+        // }
       };
     },
     methods:{
+      ...mapMutations('m_user', ['updateAddress']),
       async chooseAddress() {// 选择收货地址
         const [err,succ] = await uni.chooseAddress().catch(err => err);//uni.chooseAddress返回值是一个Promise
         if(err === null && succ.errMsg === "chooseAddress:ok") {
           console.log(succ);
-          this.address = succ;
+          // this.address = succ;
+          this.updateAddress(succ);//调用 Store 中提供的 updateAddress 方法，将 address 保存到 Store 里面
         }
       }
     }
