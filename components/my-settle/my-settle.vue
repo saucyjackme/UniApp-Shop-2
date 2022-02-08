@@ -1,8 +1,8 @@
 <template>
   <view class="my-settle-container">
     <!-- 全选 -->
-    <label class="radio">
-      <radio color="#C00000" :checked="isFullTotal" /><text>全选</text>
+    <label class="radio" @click="changeAllState">
+      <radio color="#C00000" :checked="isFullChecked" /><text>全选</text>
     </label>
     <!-- 合计 -->
     <view class="amount-box">
@@ -14,17 +14,24 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   export default {
     name: "my-settle",
     computed:{
       ...mapGetters('m_cart',['checkedCount','total']),
-      isFullTotal() {
+      isFullChecked() {
         return this.total === this.checkedCount
       }
     },
     data() {
       return {};
+    },
+    methods:{
+      ...mapMutations('m_cart', ['updateAllGoodsState']),
+      changeAllState() {//点击实现全选和反选
+        // console.log(!this.isFullChecked);
+        this.updateAllGoodsState(!this.isFullChecked);
+      }
     }
   }
 </script>

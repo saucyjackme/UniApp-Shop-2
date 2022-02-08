@@ -30,39 +30,44 @@ export default {
     saveToStorage(state) { //将购物车中的数据持久化存储到本地
       uni.setStorageSync('cart', JSON.stringify(state.cart)); //将对象存储化保存到本地，[将数组转成字符串]命名为cart
     },
-    updateGoodsState(state,goods) { //更改商品勾选状态
+    updateGoodsState(state, goods) { //更改商品勾选状态
       console.log(state);
       console.log(goods.goods_id);
       console.log(goods.goods_state);
-      const findResult = state.cart.find(x => x.goods_id === goods.goods_id);//根据 goods_id 查询购物车中对应商品的信息对象
+      const findResult = state.cart.find(x => x.goods_id === goods.goods_id); //根据 goods_id 查询购物车中对应商品的信息对象
       console.log(findResult);
-      if(findResult) {
-        findResult.goods_state = goods.goods_state;//更新对应商品的勾选状态
-        this.commit('m_cart/saveToStorage');// 触发函数，持久化存储到本地
+      if (findResult) {
+        findResult.goods_state = goods.goods_state; //更新对应商品的勾选状态
+        this.commit('m_cart/saveToStorage'); // 触发函数，持久化存储到本地
       }
     },
-    updateGoodsCount(state,goods) {//更新商品数量
-      const findResult = state.cart.find(x => x.goods_id === goods.goods_id);//根据goods_count 查询购物车中对应商品的数量
-      if(findResult) {
-        findResult.goods_count = goods.goods_count;//更新对应商品的数量
-        this.commit('m_cart/saveToStorage');// 触发函数，持久化存储到本地
+    updateGoodsCount(state, goods) { //更新商品数量
+      const findResult = state.cart.find(x => x.goods_id === goods.goods_id); //根据goods_count 查询购物车中对应商品的数量
+      if (findResult) {
+        findResult.goods_count = goods.goods_count; //更新对应商品的数量
+        this.commit('m_cart/saveToStorage'); // 触发函数，持久化存储到本地
       }
     },
-    removeGoodsById(state, goods_id) {//删除商品，传入需要删除商品的goods_id
+    removeGoodsById(state, goods_id) { //删除商品，传入需要删除商品的goods_id
       state.cart = state.cart.filter(x => x.goods_id !== goods_id); //只留下与所选id不同的商品
-      this.commit('m_cart/saveToStorage');// 触发函数，持久化存储到本地
+      this.commit('m_cart/saveToStorage'); // 触发函数，持久化存储到本地
+    },
+    updateAllGoodsState(state, newState) {
+      state.cart.forEach(x => x.goods_state = newState) //循环更新购物车中每件商品的勾选状态
+      this.commit('m_cart/saveToStorage');      // 持久化存储到本地
     }
   },
   // 模块的 getters 属性
   getters: {
     total(state) { //统计购物车中商品的总数
-      let goodsCount = 0;
-      state.cart.forEach(goods => goodsCount += goods.goods_count) // 循环统计商品的数量，累加到变量 goodsCount 中
-      return goodsCount
+      // let goodsCount = 0;
+      // state.cart.forEach(goods => goodsCount += goods.goods_count) // 循环统计商品的数量，累加到变量 goodsCount 中
+      // return goodsCount
+      return state.cart.reduce((total, item) => total += item.goods_count, 0)
     },
-    checkedCount(state) { //统计购物车中勾选的商品总数
-    //利用filter将已勾选的商品筛选出来，然后用reduce进行累计，reduce() 的返回值就是已勾选的商品的总数量,reduce(前值，后值)累加
-      return state.cart.filter(x => x.goods_state).reduce((total,item)=> total += item.goods_count, 0)
+    checkedCount(state) { //统计购物车中已勾选的商品总数
+      //利用filter将已勾选的商品筛选出来，然后用reduce进行累计，reduce() 的返回值就是已勾选的商品的总数量,reduce(前值，后值)累加
+      return state.cart.filter(x => x.goods_state).reduce((total, item) => total += item.goods_count, 0)
     }
   },
 }
