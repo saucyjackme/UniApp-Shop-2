@@ -68,6 +68,9 @@ export default {
     checkedCount(state) { //统计购物车中已勾选的商品总数
       //利用filter将已勾选的商品筛选出来，然后用reduce进行累计，reduce() 的返回值就是已勾选的商品的总数量,reduce(前值，后值)累加
       return state.cart.filter(x => x.goods_state).reduce((total, item) => total += item.goods_count, 0)
+    },
+    checkedGoodsAmount(state) {
+      return state.cart.filter(x => x.goods_state).reduce((total, item) => total += item.goods_count * item.goods_price, 0).toFixed(2)
     }
   },
 }

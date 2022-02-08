@@ -6,7 +6,7 @@
     </label>
     <!-- 合计 -->
     <view class="amount-box">
-      合计<text class="amount">￥123</text>
+      合计<text class="amount">￥{{checkedGoodsAmount}}</text>
     </view>
     <!-- 结算 -->
     <view class="btn-settle">结算({{checkedCount}})</view>
@@ -18,7 +18,7 @@
   export default {
     name: "my-settle",
     computed:{
-      ...mapGetters('m_cart',['checkedCount','total']),
+      ...mapGetters('m_cart',['checkedCount','total','checkedGoodsAmount']),
       isFullChecked() {
         return this.total === this.checkedCount
       }
