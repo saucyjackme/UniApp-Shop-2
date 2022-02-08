@@ -21,7 +21,7 @@
       </block>
     </uni-swipe-action>
     <!-- 商品价格数量结算区域 -->
-    <my-settle></my-settle>
+    <my-settle class="my-settle"></my-settle>
   </view>
 </template>
 
@@ -79,5 +79,8 @@
     .cart-title-text {
       margin-left: 10px;
     }
+  }
+  .my-settle {
+    // z-index: 999;
   }
 </style>

@@ -59,6 +59,10 @@ export default {
       let goodsCount = 0;
       state.cart.forEach(goods => goodsCount += goods.goods_count) // 循环统计商品的数量，累加到变量 goodsCount 中
       return goodsCount
+    },
+    checkedCount(state) { //统计购物车中勾选的商品总数
+    //利用filter将已勾选的商品筛选出来，然后用reduce进行累计，reduce() 的返回值就是已勾选的商品的总数量,reduce(前值，后值)累加
+      return state.cart.filter(x => x.goods_state).reduce((total,item)=> total += item.goods_count, 0)
     }
   },
 }
