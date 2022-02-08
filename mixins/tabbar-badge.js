@@ -3,6 +3,11 @@ export default {
   computed:{
     ...mapGetters('m_cart',['total']),
   },
+  watch:{
+    total() {//解决徽标数字状态不实时刷新
+      this.setBadge();
+    }
+  },
   onShow() {
     this.setBadge(); // 在页面刚展示的时候，调用此函数【设置数字徽标】
   },

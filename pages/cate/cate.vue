@@ -63,6 +63,7 @@
         // 判断是否获取失败
         if (res.meta.status !== 200) return uni.$showMsg();
         // 转存数据
+        console.log(res);
         this.cateList = res.message;
         this.cateLevel2 = res.message[0].children;
       },
@@ -74,6 +75,7 @@
       },
       //在三级菜单中跳转至每个商品页
       goToGoodsItem(item) {
+        console.log(item);
         uni.navigateTo({
           url: '/subpkg/goods_detail/goods_detail?cid=' + item.cat_id
         })

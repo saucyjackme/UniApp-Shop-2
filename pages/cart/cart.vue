@@ -1,5 +1,5 @@
 <template>
-  <view class="cart-contatiner">
+  <view class="cart-contatiner" v-if="cart.length !== 0">
     <!-- 收货地址组件 -->
     <my-address></my-address>
     <!-- 购物车标题区域 -->
@@ -22,6 +22,11 @@
     </uni-swipe-action>
     <!-- 商品价格数量结算区域 -->
     <my-settle class="my-settle"></my-settle>
+  </view>
+  <!-- 购物车为空时，显示页面 -->
+  <view class="empty-cart" v-else>
+    <image src="/static/cart_empty@2x.png" class="empty-img"></image>
+    <text class="tip-text">空空如也~</text>
   </view>
 </template>
 
@@ -47,7 +52,7 @@
       };
     },
     methods: {
-      ...mapMutations('m_cart', ['updateGoodsState', 'updateGoodsCount','removeGoodsById']),
+      ...mapMutations('m_cart', ['updateGoodsState', 'updateGoodsCount', 'removeGoodsById']),
       radioChangeHandler(e) { // 自定义事件默认不会被触发，所以需要radioClickHandler传递参数
         console.log(e); //这里获得商品信息，
         this.updateGoodsState(e);
@@ -68,6 +73,7 @@
   .cart-contatiner {
     padding-bottom: 50px;
   }
+
   .cart-title {
     height: 40px;
     align-items: center;
@@ -80,7 +86,23 @@
       margin-left: 10px;
     }
   }
+
   .my-settle {
     // z-index: 999;
+  }
+  .empty-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 150px;
+    .empty-img {
+      width: 90px;
+      height: 90px;
+    }
+    .tip-text {
+      font-size: 12px;
+      color: gray;
+      margin-top: 15px;
+    }
   }
 </style>
