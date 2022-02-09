@@ -9,16 +9,18 @@
       合计<text class="amount">￥{{checkedGoodsAmount}}</text>
     </view>
     <!-- 结算 -->
-    <view class="btn-settle">结算({{checkedCount}})</view>
+    <view class="btn-settle" @click="settlement">结算({{checkedCount}})</view>
   </view>
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex'
+  import { mapGetters, mapMutations, mapState } from 'vuex'
   export default {
     name: "my-settle",
     computed:{
-      ...mapGetters('m_cart',['checkedCount','total','checkedGoodsAmount']),
+      ...mapGetters('m_cart', ['checkedCount','total','checkedGoodsAmount']),//购物车组件
+      ...mapGetters('m_user', ['addstr']),//用户信息组件
+      ...mapState('m_user', ['token']), //登录成功后服务下发的对应用户token
       isFullChecked() {
         return this.total === this.checkedCount
       }
@@ -31,6 +33,11 @@
       changeAllState() {//点击实现全选和反选
         // console.log(!this.isFullChecked);
         this.updateAllGoodsState(!this.isFullChecked);
+      },
+      settlement() {
+          if (!this.checkedCount) return uni.$showMsg('请选择要结算的商品！') // 1. 先判断是否勾选了要结算的商品
+          if (!this.addstr) return uni.$showMsg('请选择收货地址！')// 2. 再判断用户是否选择了收货地址
+          if (!this.token) return uni.$showMsg('请先登录！')// 3. 最后判断用户是否登录了
       }
     }
   }

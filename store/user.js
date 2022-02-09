@@ -2,6 +2,7 @@ export default {
   namespaced: true,//开启命名空间
   state:() => ({
     address: JSON.parse(uni.getStorageSync('address') || '{}'),//4.读取本地的收货地址数据，初始化 address 对象[或有本地数据或为空对象]
+    token: '',//登录成功后的服务器下发的对应用户的token
   }),
   //方法
   mutations: {
