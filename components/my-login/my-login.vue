@@ -10,18 +10,20 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
+  
   export default {
     name: "my-login",
     data() {
       return {};
     },
     methods: {
-      //用户授权之后，获取用户基本信息
-      getUserProfile() {
+      ...mapMutations('m_user', ['updateUserInfo']),
+      getUserProfile() { //用户授权之后，获取用户基本信息
         console.log('xxx');
         uni.getUserProfile({
           desc: '获取用户信息',
-          success: res => console.log(res),
+          success: res => {console.log(res);this.updateUserInfo(res)},
           fail: err => {console.log(err);
             if(err.errMsg === 'getUserProfile:fail auth deny') return uni.$showMsg('登录失败!')
           }

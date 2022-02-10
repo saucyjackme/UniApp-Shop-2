@@ -3,6 +3,7 @@ export default {
   state:() => ({
     address: JSON.parse(uni.getStorageSync('address') || '{}'),//4.读取本地的收货地址数据，初始化 address 对象[或有本地数据或为空对象]
     token: '',//登录成功后的服务器下发的对应用户的token
+    userinfo: JSON.parse(uni.getStorageSync('userinfo') || '{}') //用户基本信息
   }),
   //方法
   mutations: {
@@ -12,6 +13,13 @@ export default {
     },
     saveAddressToStorage(state) {//3.将 address 持久化存储到本地 mutations 方法
       uni.setStorageSync('address', JSON.stringify(state.address));//格式化右边存左边
+    },
+    updateUserInfo(state, userinfo) { //更新用户信息
+      state.userinfo = userinfo;
+      this.commit('m_user/saveUserInfoToStorage');
+    },
+    saveUserInfoToStorage(state) { //将userinfo持久化存储到本地 mutations方法
+      uni.setStorageSync('useinfo', JSON.stringify(state.userinfo));
     }
   },
   getters: {
