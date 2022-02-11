@@ -23,11 +23,28 @@
         console.log('xxx');
         uni.getUserProfile({
           desc: '获取用户信息',
-          success: res => {console.log(res);this.updateUserInfo(res)},
-          fail: err => {console.log(err);
+          success: res => {
+            // console.log(res);
+            this.updateUserInfo(res);
+            this.getToken(res);// 获取登录成功后的 Token 字符串
+            },
+          fail: err => {
+            console.log(err);
             if(err.errMsg === 'getUserProfile:fail auth deny') return uni.$showMsg('登录失败!')
           }
-        })
+        });
+        console.log(uni.login());
+      },
+      getToken(info) { //调用接口，换取永久的token
+        uni.login({
+            provider: 'weixin',
+            success: res => {
+             console.log(res)
+            },
+            fail(e){
+             console.log('eeee',e)
+            }
+           })
       },
     },
   }
