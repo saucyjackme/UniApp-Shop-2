@@ -23,7 +23,7 @@
 
 <style lang="scss">
   page,
-  .my-container {
+  .my-container { //小程序都有page根标签
     height: 100%;
   }
 </style>
