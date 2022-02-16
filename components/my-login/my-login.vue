@@ -22,7 +22,7 @@
     methods: {
       ...mapMutations('m_user', ['updateUserInfo']),
       getUserProfile() { //用户授权之后，获取用户基本信息
-        console.log('xxx');
+        console.log('获取用户信息');
         uni.getUserProfile({
           desc: '获取用户信息',
           success: res => {
@@ -39,8 +39,23 @@
       getToken(info) { //调用接口，换取永久的token
         uni.login({
           provider: 'weixin',
-          success: res => {
-            console.log(res.code)
+          success:async res => {
+            console.log('调用接口1');
+            console.log(info);
+            console.log('调用接口2');
+            console.log(res);
+            console.log(res.code);
+            const query = { //准备参数对象
+              code: res.code,//
+              encryptedData: info.encryptedData,
+              iv: info.iv,
+              rawData: info.rawData,
+              signature: info.signature
+            };
+            console.log(query);
+            const { data: loginResult } = await uni.$http.post('/api/public/v1/users/wxlogin', query);
+            console.log(loginResult);
+            uni.$showMsg('登录成功');
           },
           fail(err) {
             return uni.$showMsg('登录失败')
