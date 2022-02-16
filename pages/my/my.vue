@@ -22,5 +22,8 @@
 </script>
 
 <style lang="scss">
-
+  page,
+  .my-container {
+    height: 100%;
+  }
 </style>

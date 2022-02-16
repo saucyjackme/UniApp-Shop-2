@@ -20,7 +20,7 @@
       return {};
     },
     methods: {
-      ...mapMutations('m_user', ['updateUserInfo']),
+      ...mapMutations('m_user', ['updateUserInfo','updateToken']),
       getUserProfile() { //用户授权之后，获取用户基本信息
         console.log('获取用户信息');
         uni.getUserProfile({
@@ -55,6 +55,7 @@
             console.log(query);
             const { data: loginResult } = await uni.$http.post('/api/public/v1/users/wxlogin', query);
             console.log(loginResult);
+            this.updateToken(loginResult.message.token);//更新token到vuex
             uni.$showMsg('登录成功');
           },
           fail(err) {
