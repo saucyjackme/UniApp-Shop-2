@@ -11,16 +11,19 @@
 
 <script>
   import {
-    mapMutations
+    mapMutations, mapState
   } from 'vuex'
 
   export default {
     name: "my-login",
+    computed:{
+      ...mapState('m_user',['redirectInfo'])
+    },
     data() {
       return {};
     },
     methods: {
-      ...mapMutations('m_user', ['updateUserInfo','updateToken']),
+      ...mapMutations('m_user', ['updateUserInfo','updateToken','updateRedirectInfo']),
       getUserProfile() { //用户授权之后，获取用户基本信息
         console.log('获取用户信息');
         uni.getUserProfile({
@@ -40,11 +43,11 @@
         uni.login({
           provider: 'weixin',
           success:async res => {
-            console.log('调用接口1');
-            console.log(info);
-            console.log('调用接口2');
-            console.log(res);
-            console.log(res.code);
+            // console.log('调用接口1');
+            // console.log(info);
+            // console.log('调用接口2');
+            // console.log(res);
+            // console.log(res.code);
             const query = { //准备参数对象
               code: res.code,//
               encryptedData: info.encryptedData,
@@ -61,8 +64,19 @@
           fail(err) {
             return uni.$showMsg('登录失败')
           }
-        })
+        });
+        this.navigateBack();
       },
+      navigateBack() {//返回登录前页面
+        if(this.redirectInfo && this.redirectInfo.switchType === 'switchTab') {//redirectInfo不为null且switchType的值为swichTab
+          uni.switchTab({
+            url: this.redirectInfo.from, //页面跳转
+            complete: () => {//跳转完成vuex中redirectInfo重置为空属性
+              this.updateRedirectInfo(null);
+            }
+          })
+        }
+      }
     },
   }
 </script>
